@@ -1,0 +1,43 @@
+Hi. I don't understand the module part.
+
+#(a) What is 307,385? All modules in the entire GREG? Or all modules in chr12? How can be almost as many modules as nodes? 
+You are right. There have a lot of modules just have one nodes. Because in the first arguments, I didn't use distinct to ask only unique nodes. it made a lot of duplicated nodes. 
+
+All modules just made by those nodes which are related chr12 nodes (included chr12 nodes, but only limit those chr12 nodes have relationships.
+
+I improved that by add distinct factions for the first arguments about louvain.
+
+The results will become 34 communites.
+
+
+#(b) All modules I see are made of bins. Where are the TFs? 
+
+ At module_chr12_total object, I only returned all nodes are chr12, not included TF. So you only saw bins and not TFs.
+
+
+
+
+
+#(c) What are the 50 modules in module_chr12_total? I thought it was the 50 largest, but no, many have one only node. 
+
+
+
+#(d) In the plot where you show modules with allnode, chr12node and gene (module_chr12_list), how can you have allnode and chr12node in the same module? Modules using all nodes can't be the same as modules using only chr12. 
+
+
+
+#(e) In the enrichment part, you just show me a list of GO or KEGG terms. I need to see the GO or KEGG terms for each module.
+
+
+#Problem to fix 1: I checked module_chr12_total. There are ZERO TF, no module includes TFs. Where are the TFs?
+
+
+#
+Problem to fix 2: I checked "queryLouvainForChr12_TargetNodesInModules". I am not sure what is Louvain doing when you ask "where id(n) in #{TargetNodes_NodeID}", but I think that it might be excluding all other nodes from the community generation process. 
+
+Please use Louvain for ALL nodes and get ALL communities, do not filter anything inside Neo4j, and please report the information of ALL the nodes inside ALL communities. 
+
+Then, send all community information in a table or dataframe to R. After all communities are in R, filter the small communities and select the target nodes IN R, not inside the Louvain query. I suspect results may be different.
+
+
+AllgeneName,TFName,LncRNAName,AllgeneName_TF_LncRNA, mod1,mod2
